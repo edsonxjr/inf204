@@ -1,7 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ItemTarefa({ tarefa }) {
+export interface Tarefa {
+  id: number;
+  descricao: string;
+  concluida: boolean;
+}
+
+interface ItemTarefaProps {
+  tarefa: Tarefa;
+}
+
+export default function ItemTarefa({ tarefa }: ItemTarefaProps) {
   return (
     <View style={styles.card}>
       {tarefa.concluida ? (
