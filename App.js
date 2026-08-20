@@ -1,77 +1,64 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-
-const BotaoCustomizado = ({ titulo, onPress, corFundo }) => (
-  <TouchableOpacity style={[styles.botao, { backgroundColor: corFundo }]} onPress={onPress}>
-    <Text style={styles.textoBotao}>{titulo}</Text>
-  </TouchableOpacity>
-);
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import ItemTarefa from "./ItemTarefa";
 
 export default function App() {
-  const [contagem, setContagem] = useState(0);
+  const [tarefas, setTarefas] = useState([
+    { id: 1, descricao: "Estudar ES6+", concluida: true },
+    { id: 2, descricao: "Configurar ambiente Expo", concluida: true },
+    { id: 3, descricao: "Entender o funcionamento do JSX", concluida: false },
+    { id: 4, descricao: "Finalizar Roteiro", concluida: false },
+  ]);
 
-  const incrementar = () => setContagem(contagem + 1);
-  const decrementar = () => setContagem(contagem > 0 ? contagem - 1 : 0);
-  const zerar = () => setContagem(0);
+  const pendentes = tarefas.filter(t => !t.concluida);
 
-  const botoes = [
-    { id: 1, titulo: "Incrementar +1", acao: incrementar, cor: "#2196f3" },
-    { id: 2, titulo: "Decrementar -1", acao: decrementar, cor: "#2196f3" },
-    { id: 3, titulo: "Zerar", acao: zerar, cor: "#f44336" }
-  ];
+  const adicionar = () => {
+    setTarefas([
+      ...tarefas,
+      { id: Date.now(), descricao: "Nova Tarefa do Desafio", concluida: false }
+    ]);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Contagem Atual:</Text>
-      
-      <Text style={[styles.numero, contagem === 0 ? styles.corZerado : styles.corAtivo]}>
-        {contagem}
-      </Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.titulo}>Todas as Tarefas</Text>
+      {tarefas.map(t => <ItemTarefa key={t.id} tarefa={t} />)}
 
-      {botoes.map(({ id, titulo, acao, cor }) => (
-        <BotaoCustomizado
-          key={id}
-          titulo={titulo}
-          onPress={acao}
-          corFundo={cor}
-        />
-      ))}
-    </View>
+      <Text style={styles.titulo}>Faltam Fazer</Text>
+      {pendentes.map(t => <ItemTarefa key={t.id} tarefa={t} />)}
+
+      <TouchableOpacity style={styles.botao} onPress={adicionar}>
+        <Text style={styles.textoBotao}>+ Adicionar Tarefa</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff"
+    backgroundColor: "#f0f2f5",
+    paddingTop: 40,
+    paddingHorizontal: 20,
   },
   titulo: {
-    fontSize: 20,
-    color: "#333333"
-  },
-  numero: {
-    fontSize: 48,
+    fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 20
-  },
-  corZerado: {
-    color: "#9e9e9e"
-  },
-  corAtivo: {
-    color: "#4caf50"
+    color: "#1c2833",
+    marginTop: 15,
+    marginBottom: 15,
   },
   botao: {
-    padding: 15,
-    borderRadius: 8,
+    backgroundColor: "#1c2833",
+    padding: 16,
+    borderRadius: 10,
+    alignItems: "center",
     marginTop: 10,
-    width: 200,
-    alignItems: "center"
+    marginBottom: 40,
   },
   textoBotao: {
-    color: "#ffffff",
+    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
