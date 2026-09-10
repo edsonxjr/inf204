@@ -11,17 +11,17 @@ export default function App() {
       <View style={styles.container}>
         
         <View style={styles.cartao}>
-          <Image source={{ uri: "https://cdn.sofifa.net/players/238/794/24_120.png" }} style={styles.avatar} />
+          <Image source={require("./assets/vini.jpg")} style={styles.avatar} />
           <Text style={styles.nomeUsuario}>{nome}</Text>
           <Text style={styles.profissao}>Ponta Esquerda</Text>
           <TouchableOpacity style={styles.botao} activeOpacity={0.7} onPress={() => alert("Seguindo " + nome)}>
             <Text style={styles.textoBotao}>Seguir</Text>
           </TouchableOpacity>
-          <TextInput style={styles.input} placeholder="Alterar nome..." value={nome} onChangeText={(texto) => setNome(texto)} />
+          <TextInput style={styles.input} placeholder="Alterar nome..." value={nome} onChangeText={setNome} />
         </View>
 
         <View style={styles.cartao}>
-          <Image source={{ uri: "https://cdn.sofifa.net/players/192/985/24_120.png" }} style={styles.avatar} />
+          <Image source={require("./assets/kevin.jpg")} style={styles.avatar} />
           <Text style={styles.nomeUsuario}>Kevin De Bruyne</Text>
           <Text style={styles.profissao}>Meio-Campista</Text>
           <TouchableOpacity 
@@ -34,7 +34,7 @@ export default function App() {
         </View>
 
         <View style={styles.cartao}>
-          <Image source={{ uri: "https://cdn.sofifa.net/players/203/376/24_120.png" }} style={styles.avatar} />
+          <Image source={require("./assets/virgil.jpg")} style={styles.avatar} />
           <Text style={styles.nomeUsuario}>Virgil van Dijk</Text>
           <Text style={styles.profissao}>Zagueiro</Text>
           <TouchableOpacity style={styles.botao} activeOpacity={0.7}>
