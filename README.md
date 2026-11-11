@@ -14,7 +14,7 @@ Abaixo estão os comandos necessários para navegar e executar cada uma das entr
 
 ### Prática 01
 ```bash
-git checkout feature/pratica-01
+git checkout feature/pratica-01 
 cd pratica-01
 npm install
 npx expo start -c --tunnel ngrok
